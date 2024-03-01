@@ -1,3 +1,7 @@
+import br.com.Conradostr.Models.Game;
+import br.com.Conradostr.Models.InfoGame;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -19,7 +23,15 @@ public class Main {
         HttpResponse<String> response = client
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+      var json = response.body();
+
+      var gson = new Gson();
+
+      var myGame = gson.fromJson(json, InfoGame.class);
+        var game = new Game(myGame);
+
+        System.out.println(game);
+
 
     }
 }
