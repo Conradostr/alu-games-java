@@ -25,12 +25,16 @@ public class Main {
 
       var json = response.body();
 
-      var gson = new Gson();
+      try {
+          var gson = new Gson();
+          var myGame = gson.fromJson(json, InfoGame.class);
+          var game = new Game(myGame);
+          System.out.println(game);
+      } catch (Exception e) {
+          System.out.println("*** Id invalido ***");
+          System.out.println(e.getMessage());
 
-      var myGame = gson.fromJson(json, InfoGame.class);
-        var game = new Game(myGame);
-
-        System.out.println(game);
+      }
 
 
     }
